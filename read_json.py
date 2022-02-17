@@ -2,6 +2,8 @@ import json
 import sys
 import re
 
+from numpy import isin
+
 # Making a Global Variable for the required fields in the JSON file
 FIELDS = ['device_id', 'patient_id', 'measurement', 'data']
 
@@ -11,31 +13,39 @@ DEVICES = [0,1,2,3,4,5]
 def read_json(filename):
     
     # Open json file and read it
-    with open(filename, 'r') as openfile:
+    try:
 
-        json_object = json.load(openfile)
-    
-    # Now check for validity
-    flag = check_json(json_object)
+        with open(filename, 'r') as openfile:
 
-    # If valid output to a .txt file
-    if(flag):
+            json_object = json.load(openfile)
+    except:
+        return "Error: Can't open JSON"
 
-        # Create a json file from the dictionary
-        object = json.dumps(json_object, indent = 4)
-  
-        # Writing to sample.json
-        with open("sample.txt", "w") as outfile:
-            outfile.write(object)
-
-        # with open('test.txt', 'w') as outfile:
-        #     json.dump(json_object, outfile)
-
-    # If invalid send an error
     else:
-        print("Invalid JSON format")
+
+        # Now check for validity
+        flag, message = check_json(json_object)
+
+        # If valid output to a .txt file
+        if(flag):
+
+            # Create a json file from the dictionary
+            object = json.dumps(json_object, indent = 4)
+    
+            # Writing to sample.json
+            with open("sample.txt", "w") as outfile:
+                outfile.write(object)
+
+            # with open('test.txt', 'w') as outfile:
+            #     json.dump(json_object, outfile)
+
+        # If invalid send an error
+        else:
+            print("Invalid JSON format: " + message)
 
 def check_json(json):
+    
+    message = ""
 
     # Extract all the keys from the json object
     keys = list(json.keys())
@@ -45,13 +55,21 @@ def check_json(json):
         
         # Now we would have to check if the device id exists in our database
         # For now just using a global variable for this
-        device_id = int(json['device_id'])
-        if (device_id in DEVICES):
+        device_id = json['device_id']
+        if (device_id in DEVICES and isinstance(device_id, int)):
 
-            if(measurements(json)):
-                return True
+            flag, message = measurements(json)
+
+            if(flag == True):
+                return True, message
+            else:
+                return False, message
+        else:
+            message = "Device ID doesn't exist/wrong data type"
+            return False, message
     else:
-        return False
+        message = "Incorrect fields"
+        return False, message
 
 def measurements(json):
 
@@ -59,42 +77,49 @@ def measurements(json):
     # not checking if value contains letters or if units contains numbers
     name = json['measurement']
     unit = json['data']['unit']
-    value = int(json['data']['value'])
+    value = json['data']['value']
+
+    message = ""
+
+    # Check that name, unit and value are their correct type (str or int)
+    if (isinstance(name, int) or isinstance(unit, int) or isinstance(value,str)):
+        message = "Incorrect data type for fields"
+        return False, message
 
     # Check that the units and values are correct
     if (name == "temperature"):
 
         # print("Temp")
         if ( (unit == 'k' or unit == 'c' or unit == 'f') and (value >= 0)):
-            return True
+            return True, message
 
     if (name == "blood pressure"):
 
         # print("Blood Press")
         if ( (unit == 'mmHg') and (value >= 0)):
-            return True
+            return True, message
 
     if (name == "heart beat"):
 
         # print("Heart Beat")
         if ( (unit == 'bpm') and (value >= 0)):
-            return True
+            return True, message
 
     if (name == "weight"):
 
         # print("Weight")
         if ( (unit == 'lbs') and (value >= 0)):
-            return True
+            return True, message
     
     if (name == "oxygen level"):
 
         # print("Oxygen Level")
         if ( (unit == 'percent') and (value >= 0)):
-            return True
+            return True, message
 
     else:
-        # print("Two")
-        return False
+        message = "Measurement doesn't exist"
+        return False, message
 
 
 if __name__ == "__main__":

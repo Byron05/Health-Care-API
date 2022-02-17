@@ -1,9 +1,9 @@
 {
-   "device_id" : "0",
-   "patient_id" : "5",
+   "device_id" : 0,
+   "patient_id" : 5,
    "measurement" : "temperature",
    "data" : {
       "unit" : "f",
-      "value" : "100"
+      "value" : 100
    }
 }
