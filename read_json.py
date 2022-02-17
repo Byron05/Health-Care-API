@@ -2,6 +2,7 @@ import json
 import sys
 import re
 
+
 # Making a Global Variable for the required fields in the JSON file
 FIELDS = ['device_id', 'patient_id', 'measurement', 'data']
 
