@@ -1,8 +1,5 @@
 import json
 import sys
-import re
-
-from numpy import isin
 
 # Making a Global Variable for the required fields in the JSON file
 FIELDS = ['device_id', 'patient_id', 'measurement', 'data']
@@ -54,15 +51,15 @@ def check_json(json):
 
     # First check if all the necessary fields exist
     if (FIELDS == keys):
-        
+
         # Now we would have to check if the device id exists in our database
         # For now just using a global variable for this
         device_id = json['device_id']
         if (device_id in DEVICES and isinstance(device_id, int)):
 
-            flag, message = measurements(json)
+            flag, message = check_fields(json)
 
-            if(flag == True):
+            if(flag):
                 return True, message
             else:
                 return False, message
@@ -73,7 +70,8 @@ def check_json(json):
         message = "Incorrect fields"
         return False, message
 
-def measurements(json):
+
+def check_fields(json):
 
     # Missing to do a try and catch block in case i cant convert unit
     # not checking if value contains letters or if units contains numbers
@@ -84,7 +82,7 @@ def measurements(json):
     message = ""
 
     # Check that name, unit and value are their correct type (str or int)
-    if (isinstance(name, int) or isinstance(unit, int) or isinstance(value,str)):
+    if (isinstance(name, int) or isinstance(unit, int) or isinstance(value, str)):
         message = "Incorrect data type for fields"
         return False, message
 
@@ -92,31 +90,31 @@ def measurements(json):
     if (name == "temperature"):
 
         # print("Temp")
-        if ( (unit == 'k' or unit == 'c' or unit == 'f') and (value >= 0)):
+        if ((unit == 'k' or unit == 'c' or unit == 'f') and (value >= 0)):
             return True, message
 
     if (name == "blood pressure"):
 
         # print("Blood Press")
-        if ( (unit == 'mmHg') and (value >= 0)):
+        if ((unit == 'mmHg') and (value >= 0)):
             return True, message
 
     if (name == "heart beat"):
 
         # print("Heart Beat")
-        if ( (unit == 'bpm') and (value >= 0)):
+        if ((unit == 'bpm') and (value >= 0)):
             return True, message
 
     if (name == "weight"):
 
         # print("Weight")
-        if ( (unit == 'lbs') and (value >= 0)):
+        if ((unit == 'lbs') and (value >= 0)):
             return True, message
-    
+
     if (name == "oxygen level"):
 
         # print("Oxygen Level")
-        if ( (unit == 'percent') and (value >= 0)):
+        if ((unit == 'percent') and (value >= 0)):
             return True, message
 
     else:
@@ -130,4 +128,3 @@ if __name__ == "__main__":
     filename = sys.argv[1]
 
     read_json(filename)
- 
