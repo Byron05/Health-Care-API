@@ -8,10 +8,11 @@ from numpy import isin
 FIELDS = ['device_id', 'patient_id', 'measurement', 'data']
 
 # Making a global variable to act like the database to check if the device ID is in our system
-DEVICES = [0,1,2,3,4,5]
+DEVICES = [0, 1, 2, 3, 4, 5]
+
 
 def read_json(filename):
-    
+
     # Open json file and read it
     try:
 
@@ -30,8 +31,8 @@ def read_json(filename):
         if(flag):
 
             # Create a json file from the dictionary
-            object = json.dumps(json_object, indent = 4)
-    
+            object = json.dumps(json_object, indent=4)
+
             # Writing to sample.json
             with open("sample.txt", "w") as outfile:
                 outfile.write(object)
@@ -43,8 +44,9 @@ def read_json(filename):
         else:
             print("Invalid JSON format: " + message)
 
+
 def check_json(json):
-    
+
     message = ""
 
     # Extract all the keys from the json object
@@ -128,22 +130,4 @@ if __name__ == "__main__":
     filename = sys.argv[1]
 
     read_json(filename)
-
-
-
-
-
-
-
-
-# {
-#    "device_id" : "123",
-#    "devive_info" : {
-#       "device_name" : "thermometer",
-#       "patient" : "Byron Mitchell",
-#       "data" : {
-#          "unit" : "f",
-#          "temperature" : "100"
-#       }
-#    }   
-# }
+ 
