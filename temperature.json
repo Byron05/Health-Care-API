@@ -4,6 +4,6 @@
    "measurement" : "temperature",
    "data" : {
       "unit" : "f",
-      "value" : 100
+      "value" : "100"
    }
 }

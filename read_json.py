@@ -10,6 +10,8 @@ DEVICES = [0, 1, 2, 3, 4, 5]
 
 def read_json(filename):
 
+    message =""
+
     # Open json file and read it
     try:
 
@@ -17,7 +19,8 @@ def read_json(filename):
 
             json_object = json.load(openfile)
     except:
-        return "Error: Can't open JSON"
+        message = "Error: Can't open JSON"
+        return False, message
 
     else:
 
@@ -34,12 +37,17 @@ def read_json(filename):
             with open("sample.txt", "w") as outfile:
                 outfile.write(object)
 
+            outfile.close()
+
+            message = "Everything Good!"
+            return True, message
             # with open('test.txt', 'w') as outfile:
             #     json.dump(json_object, outfile)
 
         # If invalid send an error
         else:
-            print("Invalid JSON format: " + message)
+            message = "Invalid JSON format: " + message 
+            return False, message
 
 
 def check_json(json):
@@ -114,7 +122,7 @@ def check_fields(json):
     if (name == "oxygen level"):
 
         # print("Oxygen Level")
-        if ((unit == 'percent') and (value >= 0)):
+        if ((unit == 'percent' or unit == "%") and (value >= 0 and value <= 100)):
             return True, message
 
     else:
@@ -127,4 +135,4 @@ if __name__ == "__main__":
     # Getting the filename from the arguments passed
     filename = sys.argv[1]
 
-    read_json(filename)
+    print(read_json(filename))
