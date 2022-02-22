@@ -10,7 +10,7 @@ DEVICES = [0, 1, 2, 3, 4, 5]
 
 def read_json(filename):
 
-    message =""
+    message = ""
 
     # Open json file and read it
     try:
@@ -46,7 +46,7 @@ def read_json(filename):
 
         # If invalid send an error
         else:
-            message = "Invalid JSON format: " + message 
+            message = "Invalid JSON format: " + message
             return False, message
 
 
