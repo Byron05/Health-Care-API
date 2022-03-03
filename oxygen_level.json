@@ -1,0 +1,9 @@
+{
+    "device_id" : 0,
+    "patient_id" : 5,
+    "measurement" : "oxygen level",
+    "data" : {
+       "unit" : "%",
+       "value" : 100
+    }
+ }
