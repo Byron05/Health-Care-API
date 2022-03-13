@@ -52,7 +52,7 @@ def read_json(filename):
 
 def check_json(json):
 
-    message = ""
+    message = "Everything Successful"
 
     # Extract all the keys from the json object
     keys = list(json.keys())
@@ -75,7 +75,7 @@ def check_json(json):
             message = "Device ID doesn't exist/wrong data type"
             return False, message
     else:
-        message = "Incorrect fields"
+        message = "Incorrect JSON format"
         return False, message
 
 
@@ -87,7 +87,7 @@ def check_fields(json):
     unit = json['data']['unit']
     value = json['data']['value']
 
-    message = ""
+    message = "Everything Successful"
 
     # Check that name, unit and value are their correct type (str or int)
     if (isinstance(name, int) or isinstance(unit, int) or isinstance(value, str)):
@@ -128,6 +128,18 @@ def check_fields(json):
     else:
         message = "Measurement doesn't exist"
         return False, message
+
+def create_json(json):
+
+    device_id = json['device_id']
+    patient_id = json['patient_id']
+    measurement = json['measurement']
+    unit = json['data']['unit']
+    value = json['data']['value']
+
+    response = {'device': {'device_id': device_id, 'patient_id': patient_id, 'measurement': measurement, 'data': {'unit': unit, 'value': value}}}
+    
+    return response
 
 
 if __name__ == "__main__":
