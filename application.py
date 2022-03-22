@@ -14,7 +14,7 @@ mongo = PyMongo(app)
 def hello_world():
    return "Health-Care-API"
 
-# Route to get all measurements in the data base
+# Route to get all measurements in the database
 @app.route('/measurements', methods=['GET'])
 def get_measurements():
    measurements = mongo.db.measurements.find()
