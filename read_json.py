@@ -63,6 +63,7 @@ def check_json(json):
         # Now we would have to check if the device id exists in our database
         # For now just using a global variable for this
         device_id = json['device_id']
+        
         if (device_id in DEVICES and isinstance(device_id, int)):
 
             flag, message = check_fields(json)

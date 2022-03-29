@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Messages System{% endblock %}
+
+{% block content %}
+
+{% if message  %}
+    <div class="alert alert-secondary" role="alert">
+        <p>{{ message }}</p>
+    </div>
+{% endif %}
+
+<form action="" method="post">
+    <div class="form-group">
+        <label for="To">Patient Name</label>
+        <input name="recipient" class="form-control" id="To" placeholder="Enter Patient Name" required>
+    </div>
+    <label for="Message">Message</label>
+    <br><br>
+    <textarea id="Message" rows="5" cols="50" name="message" maxlength="250" placeholder="Enter text here..." required></textarea>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
