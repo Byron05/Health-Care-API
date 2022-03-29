@@ -199,6 +199,53 @@ def send():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Route to get all measurements in the database
 @app.route('/measurements', methods=['GET'])
 def get_measurements():
