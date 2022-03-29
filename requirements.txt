@@ -60,5 +60,5 @@ greenlet==1.1.2
 pycparser==2.21
 python-engineio==3.13.2
 python-socketio==4.6.0
-six==1.16.0
 Werkzeug==2.0.3
+six
