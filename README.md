@@ -86,7 +86,7 @@ Phase 1:   Device Module
 Phase 2:   REST API
 - [x] Use Flask or Django as your WEB service platform
 - [x] Integrate module to become a RESTFUL system
-- [x] Deploy system to free [AWS](https://health-care-api.azurewebsites.net/) services
+- [x] Deploy system to free [Azure](https://health-care-api.azurewebsites.net/) services
 - [ ] Document REST APIs on Github
 
 Phase 3:   Mobile Application
