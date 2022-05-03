@@ -1,46 +1,24 @@
-# Medical_Platform
-This application will serve as a platform to monitor patients at home or in the hospitals.
-
----
-
-## User Stories
-* Patients
-  * Can enter measurements at any time
-  * Can write a text or upload video/voice message to medical professional
-  * Can book an appointment 
-  * Can view their results
-* Medical Professionals
-  * Browse their patients
-  * Assign medical devices to patients
-  * Assign alert and scheduling for medical measurements
-  * Can input data for their patients
-  * Can chat with patients using text, voice, or videos
-  * Can read transcripts of uploaded videos/messages
-  * Search for keywords in messages and chats
-  * Have a calendar to show availability
-  * See all the appointments booked at any time
-* Administrators
-  * Add users to the system
-  * Assign and change roles to users
-  * Provide interfaces to third party medical device makers
-  * Ability to disable or enable any device maker or application developer
+# Project 4
+For this Project, I researched and played around with the following topics: threading, speech2text and text2speech.
 
 ---
 
 ## Table of Contents
 
-- [Branching Strategy](#branching-strategy)
+- [Functions](#functions)
 - [Setup](#setup)
-- [Progress](#progress)
 
 ---
 
-## Branching Strategy
-A branch will be made for every module that will be implemented. The reason for this is to allow the developer to implement, experiment and test any new functionality without damaging the original code base. The code implemented in the different branches will only be merged with the main branch once it has been tested thoroughly and it is considered as the finished product for that module. 
+## Functions
+In this directory there are currently three .py files: app.py, speech_to_text.py and text_to_speech.py. 
 
-The current branches in mind are the following:
-* Device/Chat Module
-* Mobile Application
+* app.py 
+  * Shows how threading can be implemented using python. For the purpose of this project, app.py creates three task to open three seperate .wav files and do text2speech. 
+* speech_to_text.py 
+  * Converts a valid .wav file into text that is printed in the terminal. 
+* text_to_speech.py 
+  * Converts a string into a .wav file whihc is then played through the speakers of your device. 
 
 ---
 
@@ -67,32 +45,10 @@ Then install the requirements:
 python3 -m pip install requirements
 ```
 
+Then run the function you want:
+
+```
+python3 [filename.py]
+```
+
 ---
-
-## Progress
-
-### Phases
-
-Phase 0: 
-- [x] Setup Agile environment for the project (including project, GitHub, testing, etc.).
-- [x] Setup branching strategy.
-
-Phase 1:   Device Module 
-- [x] Define interface for devices to ingest data into the system.
-- [x] Implement Unit Tests for the module.
-- [x] Implement a simulation to send data via an example program.
-- [x] Document the interface well.
-
-Phase 2:   REST API
-- [x] Use Flask or Django as your WEB service platform
-- [x] Integrate module to become a RESTFUL system
-- [x] Deploy system to free [Azure](https://health-care-api.azurewebsites.net/) services
-- [ ] Document REST APIs on Github
-
-Phase 3:   Mobile Application
-- [ ] Get familiar with a cross platform framework
-- [ ] Develop a simple mobile application
-  - Integrate REST API
-  - Implement User Module
-
-### REST API Documentation
